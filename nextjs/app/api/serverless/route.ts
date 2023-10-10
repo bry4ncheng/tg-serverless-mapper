@@ -13,7 +13,7 @@ export async function POST(req: Request) {
       //pubkey, hash, network
       const data = {
         pubkey: body.pubkey,
-        hash: body.hash,
+        target: body.target,
         network: body.network
       }
       await client.set(id , JSON.stringify(data), {EX: 60*60*24})
