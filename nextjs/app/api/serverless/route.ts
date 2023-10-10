@@ -11,13 +11,13 @@ export async function POST(req: Request) {
       await client.connect();
       const id = makeId(10);
       let body = await req.json();
-      //pubkey, hash, network
+      //pubkey, target, network
       const data = {
         pubkey: body.pubkey,
         target: body.target,
         network: body.network
       }
-      url += "id";
+      url += id;
       await client.set(id , JSON.stringify(data), {EX: 60*60*24})
       await client.quit();
 
