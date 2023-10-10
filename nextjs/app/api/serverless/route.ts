@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       await client.set(id , JSON.stringify(data), {EX: 60*60*24})
       await client.quit();
 
-      return NextResponse.json("great success",  { status: 200 });
+      return NextResponse.json(id,  { status: 200 });
   } catch(e) {
       console.log("DIED ", e);
       return NextResponse.json({},  { status: 400 });
