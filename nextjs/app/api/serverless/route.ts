@@ -4,10 +4,10 @@ import * as redis from 'redis';
 const client = redis.createClient({
   url: process.env.REDIS_URL, 
 });
-let url = "https://t.me/SolanaFMAlertBot?start="
 
 export async function POST(req: Request) {
   try {
+      let url = "https://t.me/SolanaFMAlertBot?start="
       await client.connect();
       const id = makeId(10);
       let body = await req.json();
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         network: body.network
       }
       url += id;
-      await client.set(id , JSON.stringify(data), {EX: 60*60*24})
+      await client.set(id , JSON.stringify(data ), {EX: 60*60*24})
       await client.quit();
 
       return NextResponse.json(url, { status: 200 });
