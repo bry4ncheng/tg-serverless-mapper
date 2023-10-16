@@ -7,6 +7,11 @@ const client = redis.createClient({
 
 export async function POST(req: Request) {
   try {
+  //     // Preflight Check:
+  // if (req.method == "OPTIONS") {
+  //   req.headers.set("Allow", "POST");
+  // }
+
       let url = "https://t.me/SolanaFMAlertBot?start="
       await client.connect();
       const id = makeId(10);
@@ -27,7 +32,13 @@ export async function POST(req: Request) {
       return NextResponse.json({}, { status: 400 });
   }
 }
+export async function GET(req: Request) {
+  return NextResponse.json({ status: 200 });
+}
 
+export async function OPTIONS(req: Request) {
+  return NextResponse.json({ status: 200 });
+}
 function makeId(length: number) {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
